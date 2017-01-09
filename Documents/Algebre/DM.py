@@ -83,7 +83,7 @@ def diffusion_map(vlp, phi, k, t): # Calcule la diffusion map à partir
 
 
 
-vlp,phi=valeurs([5,8,9,5,6,9,20],4)
+vlp,phi=valeurs([5,8,9,5,6,9,20],4)#petit test
 print(diffusion_map(vlp, phi, 5, 2))
 
 
