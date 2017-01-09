@@ -75,7 +75,7 @@ def diffusion_map(vlp, phi, k, t):
 
 vlp,phi=valeurs([5,8,9,5,6,9,20],4)
 print(diffusion_map(vlp, phi, 5, 2))
-
+#ca marche
 
 
 
