@@ -64,8 +64,10 @@ def diffusion_map(vlp, phi, k, t):
     for j in range(0,k-1):
         psi.append([i*(vlp[j]**t) for i in phi[j]])
 
-    print(len(psi))
-    psi=np.reshape(np.asarray(psi),(len(phi)-1,k))
+
+    
+    psi=np.reshape(np.asarray(psi),(len(phi), len(psi)))
+    
     return psi
         
 
@@ -74,13 +76,6 @@ def diffusion_map(vlp, phi, k, t):
 vlp,phi=valeurs([5,8,9,5,6,9,20],4)
 print(diffusion_map(vlp, phi, 5, 2))
 
-    for i in range (0,len(x)):
-        Dp[i][i]=D[i][i]**(-0.5)
-    print(Dp)
-    M=np.dot(np.dot(Dp,L),Dp)
-    print(M)
 
-
-print(valeurs([5,8,9,5,6,9,20],4))
 
 
