@@ -7,22 +7,49 @@ import matplotlib as plt
 import pylab as pl
 import math
 
+
+
+'''
+baseUserItem=[]
+ # create a dict out of reader, converting all values to
+            # integers
 with open("data.tab", 'rb') as f:
     reader = csv.DictReader(f, delimiter = '\t')
-'''    
+ 
     for row in list(reader):
+        
         for key, value in row.iteritems():
-            if key !='cell' and value[0] not in ['H','N','P']:
-                print(key,int(float(value)))
-            
-            
-
-            # create a dict out of reader, converting all values to
-            # integers
-     baseUserItem =  [dict([key, int(value)] for key, value in row.iteritems()) for row in list(reader)]
+            if key !='Cell':
+                d={}
+                d[key]=value
+                baseUserItem.append(d)
 '''
 
+fileName = "data.tab"
+head = []
+data = []
+cell = []
+with open(fileName, 'rb') as f:
+    reader = csv.DictReader(f, delimiter = '\t')
+            # create a dict out of reader, converting all values to
+            # integers
+    for i, row in enumerate(list(reader)):
+        data.append([])
+        for key, value in row.iteritems():
+            if key == "Cell":
+                cell.append(value)
+            else:                                                                   
+                data[i].append(float(value))
+        for key, value in row.iteritems():
+            if key!="Cell":
+                head.append(key)
+d=np.array(data)
 
+
+
+
+# create a dict out of reader, converting all values to
+            # integers
 def noyau(x,y,e):
     return math.exp((-1.0/e)*(math.hypot(x,y)**2))
 
@@ -81,11 +108,10 @@ def diffusion_map(vlp, phi, k, t): # Calcule la diffusion map à partir
     return psi # retourne la diffusion map
         
 
-
-
-vlp,phi=valeurs([5,8,9,5,6,9,20],4)#petit test
-print(diffusion_map(vlp, phi, 5, 2))
-
+e=2
+print("calcul de la diffusion map pour les donnees du gene", head[0], "avec le parametre e=",e)
+vlp,phi=valeurs(d[0],e)
+print(diffusion_map(vlp, phi, len(d[0]), -0.2))
 
 
 
